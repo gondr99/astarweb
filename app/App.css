@@ -1,3 +1,10 @@
+:root 
+{
+    --blue-color: #2a0adf;
+    --dark-blue-color: #250dad;
+    --red-color: #e42323;
+}
+
 * {
     margin:0;
     padding:0;
@@ -17,6 +24,7 @@
 {
     display: flex;
     justify-content: space-between;
+    height: 330px;
 }
 .map-box 
 {
@@ -33,12 +41,56 @@
     justify-content: center;
     align-items: center;
 }
+.map-box > .slot.wall 
+{
+    background-color: #4b4b4b;
+}
 
 .info-box {
     background-color: #ddd;
     flex-basis: 400px;
     flex-grow: 1;
     margin-left:10px;
+    padding:4px 8px;
+    overflow-y: auto;
+}
+
+.info-box > .sub-title 
+{
+    margin-bottom: 10px;    
+}
+.info-box > .list 
+{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.info-box > .list > .close-item 
+{
+    flex-basis: 100px;
+    flex-grow: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 0 5px rgba(0,0,0, 0.5);
+    border-radius: 5px;
+    padding:0.25rem 0.65rem;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+.info-box > .list > .close-item > .label
+{
+    color:#fff;
+    padding:0.25rem 0.75rem;
+    border-radius: 0.25rem;
+}
+.info-box > .list > .close-item > .slot-name
+{
+    background-color: var(--blue-color);
+}
+.info-box > .list > .close-item > .parent-name 
+{
+    background-color: var(--red-color);
 }
 
 .mid-row 
@@ -66,7 +118,36 @@
 {
     width:30px;
     height: 30px;
-    border:1px solid #0937b6;
+    border:1px solid var(--blue-color);
     color:#fff;
     margin-left: 10px;
+}
+
+.bottom-row 
+{
+    margin-top: 10px;
+}
+
+.bottom-row > .sub-title
+{
+    margin-bottom: 10px;
+}
+
+.btn 
+{
+    padding:0.25rem 0.75rem;
+    border:1px solid transparent;
+    border-radius: 0.25rem;
+    transition: background-color 0.5s;
+    cursor: pointer;
+}
+
+.btn-blue 
+{
+    background-color: var(--blue-color);
+    color:#fff;
+}
+.btn-blue:hover 
+{
+    background-color: var(--dark-blue-color);
 }

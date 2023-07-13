@@ -5,13 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Astar</title>
     <link rel="stylesheet" href="/app/App.css">
-    <script src="/app/App.js"></script>
+    <script src="/app/App.js" type="module"></script>
 </head>
 <body>
     <div class="container">
         <div class="top-row">
             <div class="map-box"></div>
-            <div class="info-box"></div>
+            <div class="info-box">
+                <h4 class="sub-title">클로즈 리스트</h4>
+                <div class="list">
+                    <div class="close-item">
+                        <div class="label slot-name">A1</div>
+                        <div class="label parent-name">Null</div>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="mid-row">
             <h4 class="sub-title">오픈리스트</h4>
@@ -21,6 +29,11 @@
                 <div class="open-slot">A3</div>
             </div>
         </div>
+        <div class="bottom-row">
+            <h4 class="sub-title">메뉴</h4>
+            <button class="btn btn-blue" id="findBtn">길찾기</button>
+        </div>
+
     </div>
 </body>
 </html>
