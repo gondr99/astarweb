@@ -1,9 +1,10 @@
 export class Node {
-    constructor(pos, parent, G, F) {
+    constructor(pos, parent, G, F, name) {
         this.pos = pos;
         this.parent = parent;
         this.G = G;
         this.F = F;
+        this.name = name;
     }
     compare(other) {
         if (other.F == this.F)

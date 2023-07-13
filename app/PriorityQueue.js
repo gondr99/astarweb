@@ -3,7 +3,7 @@ export class PriorityQueue {
         this.list = [];
     }
     count() {
-        this.list.length;
+        return this.list.length;
     }
     contains(n) {
         let item = this.list.find(x => x.equal(n));
@@ -32,6 +32,11 @@ export class PriorityQueue {
         const list = this.list;
         let ret = list[0]; //맨 첫번째 녀석을 리턴
         let lastIdx = list.length - 1;
+        console.log(lastIdx);
+        if (lastIdx == 0) {
+            list.pop();
+            return ret;
+        }
         list[0] = list.pop(); //가장 마지막 원소를 뽑아서 가장 처음에
         lastIdx--;
         let now = 0;

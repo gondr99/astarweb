@@ -6,13 +6,15 @@ export class Node
     parent: Node | null;
     G: number;
     F: number;
+    name:string;
     
-    constructor(pos : Position, parent : Node| null, G:number, F:number )
+    constructor(pos : Position, parent : Node| null, G:number, F:number, name:string )
     {
         this.pos = pos;
         this.parent = parent;
         this.G = G;
         this.F = F;
+        this.name = name;
     }
 
     compare(other: Node):number

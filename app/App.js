@@ -1,18 +1,13 @@
-const mapData = [
-    ["XX", "XX", "XX", "XX", "XX", "XX", "XX", "XX", "XX", "XX"],
-    ["XX", "B1", "B2", "B3", "B4", "B5", "B6", "B7", "B8", "XX"],
-    ["XX", "C1", "C2", "C3", "C4", "C5", "C6", "C7", "C8", "XX"],
-    ["XX", "D1", "D2", "XX", "D4", "D5", "D6", "D7", "D8", "XX"],
-    ["XX", "E1", "E2", "XX", "E4", "E5", "XX", "XX", "XX", "XX"],
-    ["XX", "F1", "F2", "XX", "F4", "F5", "F6", "F7", "F8", "XX"],
-    ["XX", "G1", "G2", "XX", "G4", "G5", "G6", "G7", "G8", "XX"],
-    ["XX", "H1", "H2", "XX", "H4", "H5", "XX", "XX", "H8", "XX"],
-    ["XX", "I1", "I2", "XX", "I4", "I5", "XX", "I7", "I8", "XX"],
-    ["XX", "XX", "XX", "XX", "XX", "XX", "XX", "XX", "XX", "XX"],
-];
 import { Astar } from "./Astar.js";
+import { MapManager } from "./MapManager.js";
+import { Position } from "./Position.js";
+let astar;
+let gen;
 window.addEventListener("load", () => {
+    var _a;
     const mapBox = document.querySelector(".map-box");
+    MapManager.Instance = new MapManager();
+    const mapData = MapManager.Instance.mapData;
     for (let i = 0; i < mapData.length; i++) {
         for (let j = 0; j < mapData[i].length; j++) {
             mapBox.appendChild(makeMapSlot(mapData[i][j]));
@@ -26,9 +21,45 @@ window.addEventListener("load", () => {
             </div>`;
         return div.firstElementChild;
     }
-    let astar;
     const btn = document.querySelector("#findBtn");
     btn.addEventListener("click", () => {
-        astar = new Astar("I1", "I7");
+        astar = new Astar(new Position(1, 8), new Position(8, 8));
+        refreshList();
+        gen = astar.findPath(); //제네레이터 가져오기
     });
+    (_a = document.querySelector("#nextBtn")) === null || _a === void 0 ? void 0 : _a.addEventListener("click", e => {
+        let v = gen.next();
+        console.log(v);
+        refreshList();
+    });
+    const openDom = document.querySelector(".open-list");
+    const closeDom = document.querySelector(".info-box > .list");
+    function refreshList() {
+        // console.log(astar.closeList);
+        // console.log(astar.openList.list);
+        openDom.innerHTML = "";
+        astar.openList.list.forEach(n => {
+            let div = makeOpenItem(n.name);
+            openDom.appendChild(div);
+        });
+        closeDom.innerHTML = "";
+        astar.closeList.forEach(n => {
+            let div = makeCloseItem(n.name, n.parent == null ? "Null" : n.parent.name);
+            closeDom.appendChild(div);
+        });
+    }
+    function makeCloseItem(name, parent) {
+        let div = document.createElement("div");
+        div.innerHTML = `
+        <div class="close-item">
+            <div class="label slot-name">${name}</div>
+            <div class="label parent-name">${parent}</div>
+        </div>`;
+        return div.firstElementChild;
+    }
+    function makeOpenItem(name) {
+        let div = document.createElement("div");
+        div.innerHTML = `<div class="open-slot">${name}</div>`;
+        return div.firstElementChild;
+    }
 });

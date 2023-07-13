@@ -7,9 +7,9 @@ export class PriorityQueue
         this.list = [];
     }
 
-    count()
+    count() : number
     {
-        this.list.length;
+        return this.list.length;
     }
 
     contains( n: Node) : Node | null
@@ -48,6 +48,12 @@ export class PriorityQueue
         let ret : Node = list[0]; //맨 첫번째 녀석을 리턴
 
         let lastIdx = list.length - 1;
+        console.log(lastIdx);
+        if(lastIdx == 0) {
+            list.pop();
+            return ret;
+        }
+
         list[0] = list.pop() as Node; //가장 마지막 원소를 뽑아서 가장 처음에
 
         lastIdx--;

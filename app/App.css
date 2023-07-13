@@ -3,6 +3,7 @@
     --blue-color: #2a0adf;
     --dark-blue-color: #250dad;
     --red-color: #e42323;
+    --dark-red-color: #a01818;
 }
 
 * {
@@ -150,4 +151,14 @@
 .btn-blue:hover 
 {
     background-color: var(--dark-blue-color);
+}
+
+.btn-red 
+{
+    background-color: var(--red-color);
+    color:#fff;
+}
+.btn-red:hover 
+{
+    background-color: var(--dark-red-color);
 }
