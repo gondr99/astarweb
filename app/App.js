@@ -18,12 +18,22 @@ window.addEventListener("load", () => {
     });
     const openDom = document.querySelector(".open-list");
     const closeDom = document.querySelector(".info-box > .list");
+    let openDoms;
     function refreshList() {
-        // console.log(astar.closeList);
-        // console.log(astar.openList.list);
         openDom.innerHTML = "";
-        astar.openList.list.forEach(n => {
-            let div = makeOpenItem(n.name);
+        openDoms = [];
+        astar.openList.list.forEach((n, idx) => {
+            let div = makeOpenItem(n);
+            openDoms[idx] = div;
+            div.addEventListener("mouseenter", e => {
+                if (idx > 0) {
+                    let parentIdx = Math.floor((idx - 1) / 2);
+                    openDoms[parentIdx].classList.add("parent");
+                }
+            });
+            div.addEventListener("mouseleave", e => {
+                openDoms.forEach(x => x.classList.remove("parent"));
+            });
             openDom.appendChild(div);
         });
         closeDom.innerHTML = "";
@@ -41,9 +51,13 @@ window.addEventListener("load", () => {
         </div>`;
         return div.firstElementChild;
     }
-    function makeOpenItem(name) {
+    function makeOpenItem(n) {
         let div = document.createElement("div");
-        div.innerHTML = `<div class="open-slot">${name}</div>`;
+        div.innerHTML = `
+        <div class="open-slot">
+            ${n.name}
+            <span class="tool-tip">G: ${n.G.toFixed(2)}, F: ${n.F.toFixed(2)}</span>
+        </div>`;
         return div.firstElementChild;
     }
 });

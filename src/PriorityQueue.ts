@@ -32,7 +32,7 @@ export class PriorityQueue
             let next = Math.floor((now - 1) / 2);
             if(list[now].compare(list[next]) < 0)
             {
-                break; //부보보다 내가 우선순위가 낮아
+                break; //부모보다 내가 우선순위가 낮아
             }
             let temp:Node = list[now];
             list[now] = list[next];

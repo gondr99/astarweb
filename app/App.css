@@ -10,6 +10,7 @@
 * {
     margin:0;
     padding:0;
+    user-select: none;
 }
 
 .container  
@@ -136,6 +137,11 @@
     border-radius: 0.25rem;
     position: relative;
 }
+.mid-row > .open-list > .open-slot.parent 
+{
+    border:1px solid var(--dark-red-color);
+    background-color: var(--red-color);
+}
 
 .mid-row > .open-list > .open-slot > .tool-tip 
 {
@@ -148,8 +154,19 @@
     border-radius: 0.25rem;
     padding: 0.25rem 0.75rem;
     font-size:0.8rem;
-    width:70px;
+    width:110px;
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.3s;
 }
+
+.mid-row > .open-list > .open-slot:hover > .tool-tip 
+{
+    visibility: visible;
+    opacity: 1;
+    transform:translate(-50%, -120%);
+}
+
 .mid-row > .open-list > .open-slot > .tool-tip::after 
 {
     content:'';
