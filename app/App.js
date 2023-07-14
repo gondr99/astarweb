@@ -5,22 +5,7 @@ let astar;
 let gen;
 window.addEventListener("load", () => {
     var _a;
-    const mapBox = document.querySelector(".map-box");
     MapManager.Instance = new MapManager();
-    const mapData = MapManager.Instance.mapData;
-    for (let i = 0; i < mapData.length; i++) {
-        for (let j = 0; j < mapData[i].length; j++) {
-            mapBox.appendChild(makeMapSlot(mapData[i][j]));
-        }
-    }
-    function makeMapSlot(text) {
-        const div = document.createElement("div");
-        div.innerHTML = `
-            <div class="slot ${text === "XX" ? "wall" : ""}"> 
-                ${text === "XX" ? "" : text}
-            </div>`;
-        return div.firstElementChild;
-    }
     const btn = document.querySelector("#findBtn");
     btn.addEventListener("click", () => {
         astar = new Astar(new Position(1, 8), new Position(8, 8));
@@ -29,7 +14,6 @@ window.addEventListener("load", () => {
     });
     (_a = document.querySelector("#nextBtn")) === null || _a === void 0 ? void 0 : _a.addEventListener("click", e => {
         let v = gen.next();
-        console.log(v);
         refreshList();
     });
     const openDom = document.querySelector(".open-list");

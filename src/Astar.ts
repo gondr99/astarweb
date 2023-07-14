@@ -30,12 +30,20 @@ export class Astar
 
         let result:boolean = false;
         
-        let cnt:number = 0;
+        let cnt :number = 0;
+        let prevDom = null;
+
         //오픈리스트가 존재하는 한.
         while(opens.count() > 0)
         {
             let n : Node = opens.pop(); //하나 빼오고
-            console.log(opens.list);
+            //이게 현재 탐색노드가 된다.
+            if(prevDom != null) {
+                (prevDom as HTMLDivElement).classList.remove("now");
+            }
+            prevDom = MapManager.Instance.getDom(n.pos);
+            (prevDom as HTMLDivElement).classList.add("now");
+            
             this.findOpenList(n);
             closes.push(n); //방문완료
             
@@ -60,7 +68,6 @@ export class Astar
         }else{
             alert("경로가 없어요");
         }
-
         
     }
 
@@ -73,7 +80,7 @@ export class Astar
             {
                 if(i == 0 && j == 0) continue;
                 
-                let nX = cX + j, nY = cY + j;
+                let nX = cX + j, nY = cY + i;
                 let next:Position = new Position(nX, nY);
 
                 let n = this.closeList.find(x => x.pos.equal(next));

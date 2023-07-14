@@ -1,10 +1,18 @@
 import { Position } from "./Position.js";
 
+interface MapSlot 
+{
+    pos: Position;
+    dom: HTMLDivElement | null;
+}
+
 export class MapManager
 {
     static Instance : MapManager;
 
     mapData: string[][];
+    slotData: MapSlot[][];
+    
     constructor()
     {
         this.mapData  = [
@@ -19,6 +27,49 @@ export class MapManager
             ["XX", "I1", "I2", "XX", "I4", "I5", "XX", "I7", "I8", "XX"],
             ["XX", "XX", "XX", "XX", "XX", "XX", "XX", "XX", "XX", "XX"],
         ];
+        this.slotData = [];
+        for(let i = 0; i < this.mapData.length; i++)
+        {
+            this.slotData.push([]);
+            for(let j = 0; j < this.mapData[i].length; j++) {
+                this.slotData[i].push({pos: new Position(j, i), dom:null });
+            }
+        }
+
+        this.makeMapDomData();
+    }
+
+    getDom(pos:Position) : HTMLDivElement 
+    {
+        let {x, y} = pos;
+        return this.slotData[y][x].dom as HTMLDivElement;
+    }
+    makeMapDomData()
+    {
+        const mapBox:HTMLDivElement = document.querySelector(".map-box") as HTMLDivElement;
+        const mapData = this.mapData;
+    
+        for(let i: number = 0; i < mapData.length; i++)
+        {
+            for(let j: number = 0; j < mapData[i].length; j++)
+            {
+                let dom = this.makeMapSlot(mapData[i][j]);
+                this.slotData[i][j].dom = dom;
+                mapBox.appendChild(dom);
+            }
+        }
+    }
+
+    makeMapSlot(text:string) : HTMLDivElement
+    {
+        const div = document.createElement("div") as HTMLDivElement;
+
+        div.innerHTML = `
+            <div class="slot ${text === "XX" ? "wall" : ""}"> 
+                ${text === "XX" ? "" : text}
+            </div>`;
+        
+        return div.firstElementChild as HTMLDivElement;
     }
 
     canMove(x:number, y:number) : boolean

@@ -6,32 +6,9 @@ import { Position } from "./Position.js";
 let astar : Astar;
 let gen : Generator ;
 window.addEventListener("load", ()=>{
-    const mapBox:HTMLDivElement = document.querySelector(".map-box") as HTMLDivElement;
+    
     MapManager.Instance = new MapManager();
 
-    const mapData = MapManager.Instance.mapData;
-    for(let i: number = 0; i < mapData.length; i++)
-    {
-        for(let j: number = 0; j < mapData[i].length; j++)
-        {
-            mapBox.appendChild(makeMapSlot(mapData[i][j]));
-        }
-    }
-
-
-    function makeMapSlot(text:string) : HTMLDivElement
-    {
-        const div = document.createElement("div") as HTMLDivElement;
-
-        div.innerHTML = `
-            <div class="slot ${text === "XX" ? "wall" : ""}"> 
-                ${text === "XX" ? "" : text}
-            </div>`;
-        
-        return div.firstElementChild as HTMLDivElement;
-    }
-
-    
     const btn = document.querySelector("#findBtn") as HTMLButtonElement;
     btn.addEventListener("click", ()=>{
         
@@ -42,8 +19,6 @@ window.addEventListener("load", ()=>{
 
     document.querySelector("#nextBtn")?.addEventListener("click", e => {
         let v = gen.next();
-        console.log(v);
-
         refreshList();
     });
 

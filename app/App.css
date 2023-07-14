@@ -4,6 +4,7 @@
     --dark-blue-color: #250dad;
     --red-color: #e42323;
     --dark-red-color: #a01818;
+    --yellow-color: #dbe20d;
 }
 
 * {
@@ -42,6 +43,12 @@
     justify-content: center;
     align-items: center;
 }
+
+.map-box > .slot.now 
+{
+    background-color: var(--yellow-color);
+}
+
 .map-box > .slot.wall 
 {
     background-color: #4b4b4b;
@@ -119,9 +126,41 @@
 {
     width:30px;
     height: 30px;
-    border:1px solid var(--blue-color);
+    border:1px solid var(--dark-blue-color);
     color:#fff;
+    background-color: var(--blue-color);
     margin-left: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0.25rem;
+    position: relative;
+}
+
+.mid-row > .open-list > .open-slot > .tool-tip 
+{
+    position: absolute;
+    background-color: var(--red-color);
+    color:#fff;
+    left:50%;
+    top:0;
+    transform:translate(-50%, -50%);
+    border-radius: 0.25rem;
+    padding: 0.25rem 0.75rem;
+    font-size:0.8rem;
+    width:70px;
+}
+.mid-row > .open-list > .open-slot > .tool-tip::after 
+{
+    content:'';
+    width:10px;
+    height:10px;
+    background-color: var(--red-color);
+    transform: rotate(45deg) translateY(50%);
+    
+    position: absolute;
+    bottom:0;
+    left:50%;
 }
 
 .bottom-row 

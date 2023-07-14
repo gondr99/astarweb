@@ -20,10 +20,16 @@ export class Astar {
         opens.push(new Node(new Position(start.x, start.y), null, 0, this.calcH(start), name));
         let result = false;
         let cnt = 0;
+        let prevDom = null;
         //오픈리스트가 존재하는 한.
         while (opens.count() > 0) {
             let n = opens.pop(); //하나 빼오고
-            console.log(opens.list);
+            //이게 현재 탐색노드가 된다.
+            if (prevDom != null) {
+                prevDom.classList.remove("now");
+            }
+            prevDom = MapManager.Instance.getDom(n.pos);
+            prevDom.classList.add("now");
             this.findOpenList(n);
             closes.push(n); //방문완료
             yield cnt;
@@ -51,7 +57,7 @@ export class Astar {
             for (let j = -1; j <= 1; j++) {
                 if (i == 0 && j == 0)
                     continue;
-                let nX = cX + j, nY = cY + j;
+                let nX = cX + j, nY = cY + i;
                 let next = new Position(nX, nY);
                 let n = this.closeList.find(x => x.pos.equal(next));
                 if (n !== undefined)
