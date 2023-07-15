@@ -43,6 +43,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 }
 
 .map-box > .slot.now 
@@ -188,6 +189,44 @@
 .bottom-row > .sub-title
 {
     margin-bottom: 10px;
+}
+
+.bottom-row > .tag-info-box 
+{
+    margin: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.tag-set 
+{
+    display: flex;
+    margin-right: 10px;
+}
+
+.tag-set > .lbl 
+{
+    margin-right: 4px;
+}
+
+.tag-set > input 
+{
+    padding:0.25rem 0.75rem;
+    border:1px solid #ddd;
+    border-radius: 0.25rem;
+    cursor: pointer;
+}
+
+.msg-box 
+{
+    border:1px solid #ddd;
+    border-radius: 10px;
+    width: 100%;;
+    margin-bottom: 20px;
+    font-size:19px;
+    font-weight: 800;
+    padding:8px 12px;
 }
 
 .btn 

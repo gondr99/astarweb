@@ -54,6 +54,8 @@ export class MapManager
             for(let j: number = 0; j < mapData[i].length; j++)
             {
                 let dom = this.makeMapSlot(mapData[i][j]);
+                dom.dataset.x = j.toString();
+                dom.dataset.y = i.toString();
                 this.slotData[i][j].dom = dom;
                 mapBox.appendChild(dom);
             }
