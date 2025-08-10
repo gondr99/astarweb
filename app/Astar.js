@@ -68,16 +68,20 @@ export class Astar {
                     let name = MapManager.Instance.getName(next);
                     let nextOpenNode = new Node(next, currentNode, g, g + this.calcH(next), name);
                     let exists = this.openList.contains(nextOpenNode);
-                    if (exists != null) //기존 리스트에 존재한다
-                     {
-                        exists.G = nextOpenNode.G;
-                        exists.F = nextOpenNode.F;
-                        exists.parent = nextOpenNode.parent;
-                        //우선순위 큐 다시 리프레시 시켜줘야 함.
-                    }
-                    else {
+                    //단순화
+                    if (exists == null) {
                         this.openList.push(nextOpenNode);
                     }
+                    //리프레시 코드 제거 2025.08.11
+                    // if(exists != null) //기존 리스트에 존재한다
+                    // {
+                    //     exists.G = nextOpenNode.G;
+                    //     exists.F = nextOpenNode.F;
+                    //     exists.parent = nextOpenNode.parent;
+                    //     //우선순위 큐 다시 리프레시 시켜줘야 함.
+                    // }else{
+                    //     this.openList.push(nextOpenNode);
+                    // }
                 }
             }
         }
